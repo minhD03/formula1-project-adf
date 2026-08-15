@@ -1,0 +1,24 @@
+{
+	"name": "tr_formula1_pl",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_formula1_pipeline",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 24,
+				"startTime": "2026-08-14T23:59:59",
+				"timeZone": "AUS Eastern Standard Time"
+			}
+		}
+	}
+}

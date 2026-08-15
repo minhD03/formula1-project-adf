@@ -1,0 +1,15 @@
+{
+	"name": "michael-formula1-adf",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "australiaeast",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e1968b16-9d5b-4d40-8fad-b113f97b5a89",
+		"tenantId": "52a773a4-8be0-4b9b-a9ec-7426c975b813"
+	}
+}

@@ -1,0 +1,111 @@
+{
+	"name": "pl_formula1_pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Ingest All Files",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Test Connection",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/michaeltrial031@gmail.com/formula-project-dbs/ingest/import_data"
+				},
+				"linkedServiceName": {
+					"referenceName": "michaelFormula1Databricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Test Connection",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/michaeltrial031@gmail.com/formula-project-dbs/ingest/test_access_adls_using_access_keys"
+				},
+				"linkedServiceName": {
+					"referenceName": "michaelFormula1Databricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Convert To Csv",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Ingest All Files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/michaeltrial031@gmail.com/formula-project-dbs/ingest/convert_to_csv"
+				},
+				"linkedServiceName": {
+					"referenceName": "michaelFormula1Databricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Process All Files",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Convert To Csv",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/michaeltrial031@gmail.com/formula-project-dbs/process/process_all_files"
+				},
+				"linkedServiceName": {
+					"referenceName": "michaelFormula1Databricks",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-08-15T05:02:32Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
